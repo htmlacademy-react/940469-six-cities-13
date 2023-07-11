@@ -3,6 +3,7 @@ import Card from '../../components/card/card';
 type MainPageProps = {
  rentalOffers: number;
 }
+
 function Main ({rentalOffers}:MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
