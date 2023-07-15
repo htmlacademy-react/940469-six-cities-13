@@ -1,12 +1,16 @@
 import Card from '../../components/card/card';
+import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
- rentalOffers: number;
-}
+  rentalOffers: number;
+};
 
-function Main ({rentalOffers}:MainPageProps): JSX.Element {
+function Main({ rentalOffers }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 Cities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

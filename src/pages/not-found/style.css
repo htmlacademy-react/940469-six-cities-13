@@ -10,10 +10,14 @@
   color: black;
   flex-grow: 1;
   text-align: center;
-  vertical-align: center;
   padding-top: 10%;
 }
 
 .text__p {
   font-size: 65px;
+}
+
+.text__p-bolt {
+  font-size: 90px;
+  font-weight: bold;
 }
