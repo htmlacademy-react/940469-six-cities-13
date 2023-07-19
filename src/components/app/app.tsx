@@ -8,7 +8,7 @@ import PrivateRoute from '../private-route/private-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { Status, Authorization } from '../../const';
+import { Authorization } from '../../const';
 
 type AppProps = {
   rentalOffers: number;
@@ -28,7 +28,7 @@ function App({ rentalOffers }: AppProps): JSX.Element {
             <Route
               path={Authorization.Favorites}
               element={
-                <PrivateRoute status={Status.NoAuth}>
+                <PrivateRoute isAuth={false}>
                   <Favorites />
                 </PrivateRoute>
               }

@@ -8,9 +8,3 @@ export enum Authorization {
   Favorites = '/favorites',
   Offer = '/offer/:id',
 }
-
-export enum Status {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
