@@ -11,24 +11,24 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Authorization } from '../../const';
 
 import { ApartmentOffer } from '../../types/offer';
-import { ApartmentReview } from '../../types/review';
+/*import { ApartmentReview } from '../../types/review';*/
 
 type AppProps = {
   rentalOffers: number;
   offers: ApartmentOffer[];
-  reviews: ApartmentReview[];
+  /*reviews: ApartmentReview[];*/
 };
 
 //TODO: Потом в Offer, вероятно, будет динамическая маршрутизация.
 //TODO: А еще, нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
-function App({ rentalOffers, offers, reviews }: AppProps): JSX.Element {
+function App({ rentalOffers, offers }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={Authorization.Main}>
-            <Route index element={<Main rentalOffers={rentalOffers} />} />
+            <Route index element={<Main offers ={offers} rentalOffers={rentalOffers}/>} />
             <Route path={Authorization.Login} element={<Login />}></Route>
             <Route
               path={Authorization.Favorites}

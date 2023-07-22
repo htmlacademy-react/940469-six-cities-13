@@ -62,7 +62,7 @@ export const offers: ApartmentOffer[] = [
       longitude: 2.330499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 2.3,
     images: [
@@ -111,9 +111,9 @@ export const offers: ApartmentOffer[] = [
       longitude: 2.335499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
-    rating: 2,
+    rating: 3.6,
     images: [
       'https://13.design.pages.academy/static/hotel/1.jpg',
       'https://13.design.pages.academy/static/hotel/9.jpg',
@@ -153,9 +153,9 @@ export const offers: ApartmentOffer[] = [
       longitude: 2.375499,
       zoom: 16,
     },
-    isFavorite: false,
-    isPremium: false,
-    rating: 2,
+    isFavorite: true,
+    isPremium: true,
+    rating: 4,
     images: [
       'https://13.design.pages.academy/static/hotel/12.jpg',
       'https://13.design.pages.academy/static/hotel/19.jpg',
