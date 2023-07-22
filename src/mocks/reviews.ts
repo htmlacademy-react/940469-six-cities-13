@@ -1,6 +1,6 @@
 import {ApartmentReview} from '../types/review';
 
-const reviews: ApartmentReview[] = [
+export const reviews: ApartmentReview[] = [
   {
     id: self.crypto.randomUUID(),
     comment: 'Bathed in the nature. Completely unplugged. Unforgettable.',
@@ -49,5 +49,3 @@ const reviews: ApartmentReview[] = [
     },
   },
 ];
-
-export default reviews;

@@ -1,6 +1,6 @@
 import {ApartmentOffer} from '../types/offer';
 
-const offers: ApartmentOffer[] = [
+export const offers: ApartmentOffer[] = [
   {
     id: self.crypto.randomUUID(),
     title: 'Nice, cozy, warm big bed apartment',
@@ -191,4 +191,3 @@ const offers: ApartmentOffer[] = [
     'maxAdults': 2
   },
 ];
-export default offers;
