@@ -5,7 +5,7 @@ type CardProps = {
   offer: ApartmentOffer;
 };
 
-//TODO: Собрать все вычисления в функции и перенести в компонент с функциями.
+//TODO: Все вычисления будут собраны в функции и перенесены в компонент с функциями.
 
 function Card({ offer }: CardProps): JSX.Element {
   const [, setActiveCard] = useState('');
