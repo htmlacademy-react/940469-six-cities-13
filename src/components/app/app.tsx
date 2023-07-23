@@ -33,12 +33,12 @@ function App({ rentalOffers, offers }: AppProps): JSX.Element {
             <Route
               path={Authorization.Favorites}
               element={
-                <PrivateRoute isAuth={true}>
+                <PrivateRoute isAuth>
                   <Favorites offers ={offers}/>
                 </PrivateRoute>
               }
             />
-            <Route path={Authorization.Offer} element={<Offer />}></Route>
+            <Route path={`${Authorization.Offer}/:id`} element={<Offer />}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>

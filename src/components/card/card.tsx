@@ -1,5 +1,7 @@
 import { ApartmentOffer } from '../../types/offer';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Authorization } from '../../const';
 
 type CardProps = {
   offer: ApartmentOffer;
@@ -9,6 +11,8 @@ type CardProps = {
 
 function Card({ offer }: CardProps): JSX.Element {
   const [, setActiveCard] = useState('');
+
+  const cardId = `${Authorization.Offer}/${offer.id}`;
 
   const handleMouseEnter = () => {
     setActiveCard(offer.id);
@@ -33,7 +37,7 @@ function Card({ offer }: CardProps): JSX.Element {
         ''
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={cardId}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -41,7 +45,7 @@ function Card({ offer }: CardProps): JSX.Element {
             height="200"
             alt={offer.title}
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -73,7 +77,7 @@ function Card({ offer }: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={cardId}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

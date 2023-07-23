@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { ApartmentOffer } from '../../types/offer';
+import { Link } from 'react-router-dom';
+import {Authorization} from '../../const';
 
 type FavoritesProps = {
   offers: ApartmentOffer[];
@@ -17,7 +19,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -25,7 +27,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -79,7 +81,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                         ''
                       )}
                       <div className="favorites__image-wrapper place-card__image-wrapper">
-                        <a href="#">
+                        <Link to={`${Authorization.Offer}/${offer.id}`}>
                           <img
                             className="place-card__image"
                             src={offer.previewImage}
@@ -87,7 +89,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                             height="110"
                             alt="Place image"
                           />
-                        </a>
+                        </Link>
                       </div>
                       <div className="favorites__card-info place-card__info">
                         <div className="place-card__price-wrapper">
@@ -125,12 +127,13 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                               style={{
                                 width: `${(offer.rating * 20).toString()}%`,
                               }}
-                            ></span>
+                            >
+                            </span>
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>
                         <h2 className="place-card__name">
-                          <a href="#">{offer.title}</a>
+                          <Link to={`${Authorization.Offer}/${offer.id}`}>{offer.title}</Link>
                         </h2>
                         <p className="place-card__type">{offer.type}</p>
                       </div>
@@ -143,7 +146,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to="/">
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -151,7 +154,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
             width="64"
             height="33"
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );
