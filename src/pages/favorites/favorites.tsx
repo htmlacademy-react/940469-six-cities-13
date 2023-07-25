@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { ApartmentOffer } from '../../types/offer';
 import { Link } from 'react-router-dom';
-import {Authorization} from '../../const';
+import { Authorization } from '../../const';
 
 type FavoritesProps = {
   offers: ApartmentOffer[];
@@ -73,12 +73,10 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                       key={offer.id}
                       className="favorites__card place-card"
                     >
-                      {offer.isPremium ? (
+                      {offer.isPremium && (
                         <div className="place-card__mark">
                           <span>isPremium</span>
                         </div>
-                      ) : (
-                        ''
                       )}
                       <div className="favorites__image-wrapper place-card__image-wrapper">
                         <Link to={`${Authorization.Offer}/${offer.id}`}>
@@ -133,7 +131,9 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                           </div>
                         </div>
                         <h2 className="place-card__name">
-                          <Link to={`${Authorization.Offer}/${offer.id}`}>{offer.title}</Link>
+                          <Link to={`${Authorization.Offer}/${offer.id}`}>
+                            {offer.title}
+                          </Link>
                         </h2>
                         <p className="place-card__type">{offer.type}</p>
                       </div>

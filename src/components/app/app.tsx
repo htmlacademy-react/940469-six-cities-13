@@ -11,7 +11,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Authorization } from '../../const';
 
 import { ApartmentOffer } from '../../types/offer';
-/*import { ApartmentReview } from '../../types/review';*/
 
 type AppProps = {
   rentalOffers: number;

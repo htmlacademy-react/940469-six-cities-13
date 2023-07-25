@@ -25,16 +25,14 @@ function Card({ offer }: CardProps): JSX.Element {
   return (
     <article
       key={offer.id}
-      onMouseEnter={() => handleMouseEnter()}
-      onMouseLeave={() => handleMouseLeave()}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="cities__card place-card"
     >
-      {offer.isPremium ? (
+      {offer.isPremium && (
         <div className="place-card__mark">
           <span>isPremium</span>
         </div>
-      ) : (
-        ''
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={cardId}>

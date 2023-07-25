@@ -1,7 +1,6 @@
 import OfferList from '../../components/offer-list/offer-list';
 import { Helmet } from 'react-helmet-async';
 import {ApartmentOffer} from '../../types/offer';
-/*import {ApartmentReview} from '../../types/review';*/
 
 
 type MainProps = {
