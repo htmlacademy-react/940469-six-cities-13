@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { ApartmentOffer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { Authorization } from '../../const';
+import cn from 'classnames';
 
 type FavoritesProps = {
   offers: ApartmentOffer[];
@@ -100,11 +101,13 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                             </span>
                           </div>
                           <button
-                            className={
-                              offer.isFavorite
-                                ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-                                : 'place-card__bookmark-button button'
-                            }
+                            className={cn(
+                              'place-card__bookmark-button button',
+                              {
+                                'place-card__bookmark-button--active':
+                                  offer.isFavorite,
+                              },
+                            )}
                             type="button"
                           >
                             <svg
