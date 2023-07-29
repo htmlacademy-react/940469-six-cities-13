@@ -4,5 +4,5 @@ export const CITY: CityType = {
   title: 'Amsterdam',
   lat: 52.377956,
   lng: 4.89707,
-  zoom: 13
+  zoom: 12
 };

@@ -1,15 +1,15 @@
 import OfferList from '../../components/offer-list/offer-list';
 import { Helmet } from 'react-helmet-async';
-import {ApartmentOffer} from '../../types/offer';
+import { ApartmentOffer } from '../../types/offer';
 import Map from '../../components/map/map';
-
+import { CITY } from '../../mocks/city';
 
 type MainProps = {
   rentalOffers: number;
   offers: ApartmentOffer[];
 };
 
-function Main({rentalOffers, offers}: MainProps): JSX.Element {
+function Main({ rentalOffers, offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -94,9 +94,10 @@ function Main({rentalOffers, offers}: MainProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList offers={offers} rentalOffers={rentalOffers}/>
+            <OfferList offers={offers} rentalOffers={rentalOffers} />
             <div className="cities__right-section">
               <section className="cities__map map">
+                <Map city={CITY} points={offers} selectedPoint={undefined} />
               </section>
             </div>
           </div>
