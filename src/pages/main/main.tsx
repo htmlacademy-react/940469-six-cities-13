@@ -1,6 +1,7 @@
 import OfferList from '../../components/offer-list/offer-list';
 import { Helmet } from 'react-helmet-async';
 import {ApartmentOffer} from '../../types/offer';
+import Map from '../../components/map/map';
 
 
 type MainProps = {
@@ -95,7 +96,8 @@ function Main({rentalOffers, offers}: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <OfferList offers={offers} rentalOffers={rentalOffers}/>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+              </section>
             </div>
           </div>
         </div>
