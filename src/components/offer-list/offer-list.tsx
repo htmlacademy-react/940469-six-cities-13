@@ -12,7 +12,7 @@ function OfferList({
   rentalOffers,
   offers,
   handleOnMouseMove,
-}: OfferListProps) {
+}: OfferListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState('');
   useEffect(() => {
     if (activeCard) {
