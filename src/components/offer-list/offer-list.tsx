@@ -5,11 +5,14 @@ import { ApartmentOffer } from '../../types/offer';
 type OfferListProps = {
   rentalOffers: number;
   offers: ApartmentOffer[];
-  handleOnMouseMove: (id:string) => void;
+  handleOnMouseMove: (id: string) => void;
 };
 
-function OfferList({ rentalOffers, offers, handleOnMouseMove}: OfferListProps) {
-
+function OfferList({
+  rentalOffers,
+  offers,
+  handleOnMouseMove,
+}: OfferListProps) {
   const [activeCard, setActiveCard] = useState('');
   useEffect(() => {
     if (activeCard) {
@@ -48,8 +51,13 @@ function OfferList({ rentalOffers, offers, handleOnMouseMove}: OfferListProps) {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <Card offer={offer} key={offer.id} handleOnMouseMove={(id) => setActiveCard(id)} />
-        ))};
+          <Card
+            offer={offer}
+            key={offer.id}
+            handleOnMouseMove={(id) => setActiveCard(id)}
+          />
+        ))}
+        ;
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
@@ -11,7 +11,6 @@ type MainProps = {
 };
 
 function Main({ rentalOffers, offers }: MainProps): JSX.Element {
-
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
   const handleOnMouseMove = (activeCard: string) => {
     setOfferListActiveCard(activeCard);
@@ -101,10 +100,18 @@ function Main({ rentalOffers, offers }: MainProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList offers={offers} rentalOffers={rentalOffers} handleOnMouseMove={handleOnMouseMove}/>
+            <OfferList
+              offers={offers}
+              rentalOffers={rentalOffers}
+              handleOnMouseMove={handleOnMouseMove}
+            />
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={CITY} points={offers} selectedPoint={offerListActiveCard} />
+                <Map
+                  city={CITY}
+                  points={offers}
+                  selectedPoint={offerListActiveCard}
+                />
               </section>
             </div>
           </div>
