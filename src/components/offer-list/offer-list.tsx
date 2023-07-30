@@ -1,12 +1,22 @@
+import { useState, useEffect } from 'react';
 import Card from '../../components/card/card';
 import { ApartmentOffer } from '../../types/offer';
 
 type OfferListProps = {
   rentalOffers: number;
   offers: ApartmentOffer[];
+  handleOnMouseMove: (id:string) => void;
 };
 
-function OfferList({ rentalOffers, offers }: OfferListProps) {
+function OfferList({ rentalOffers, offers, handleOnMouseMove}: OfferListProps) {
+
+  const [activeCard, setActiveCard] = useState('');
+  useEffect(() => {
+    if (activeCard) {
+      handleOnMouseMove(activeCard);
+    }
+  }, [activeCard, handleOnMouseMove]);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -38,7 +48,7 @@ function OfferList({ rentalOffers, offers }: OfferListProps) {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <Card offer={offer} key={offer.id} />
+          <Card offer={offer} key={offer.id} handleOnMouseMove={(id) => setActiveCard(id)} />
         ))};
       </div>
     </section>

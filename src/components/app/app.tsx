@@ -4,12 +4,9 @@ import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-
 import { Authorization } from '../../const';
-
 import { ApartmentOffer } from '../../types/offer';
 
 type AppProps = {

@@ -1,8 +1,6 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
-
 import {CityType} from '../types/city-type';
-
 import {URL_TITLE_LAYER, OPEN_STREET_MAP} from '../const';
 
 function useMap(

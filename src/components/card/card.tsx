@@ -1,36 +1,27 @@
 import { ApartmentOffer } from '../../types/offer';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Authorization } from '../../const';
 import cn from 'classnames';
 
 type CardProps = {
   offer: ApartmentOffer;
+  handleOnMouseMove: (id:string) => void;
 };
 
 //TODO: Все вычисления будут собраны в функции и перенесены в компонент с функциями.
 
-function Card({ offer }: CardProps): JSX.Element {
-  const [, setActiveCard] = useState('');
+function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
+  const { id, isPremium, previewImage, title, price, isFavorite, rating, type} = offer;
 
-  const cardId = `${Authorization.Offer}/${offer.id}`;
-
-  const handleMouseEnter = () => {
-    setActiveCard(offer.id);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveCard('');
-  };
+  const cardId = `${Authorization.Offer}/${id}`;
 
   return (
     <article
-      key={offer.id}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      key={id}
+      onMouseMove={() => handleOnMouseMove(id)}
       className="cities__card place-card"
     >
-      {offer.isPremium && (
+      {isPremium && (
         <div className="place-card__mark">
           <span>isPremium</span>
         </div>
@@ -39,17 +30,17 @@ function Card({ offer }: CardProps): JSX.Element {
         <Link to={cardId}>
           <img
             className="place-card__image"
-            src={offer.previewImage}
+            src={previewImage}
             width="260"
             height="200"
-            alt={offer.title}
+            alt={title}
           />
         </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.price}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
@@ -57,7 +48,7 @@ function Card({ offer }: CardProps): JSX.Element {
               'place-card__bookmark-button button',
               {
                 'place-card__bookmark-button--active':
-                offer.isFavorite,
+                isFavorite,
               },
             )}
             type="button"
@@ -71,16 +62,16 @@ function Card({ offer }: CardProps): JSX.Element {
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span
-              style={{ width: `${(offer.rating * 20).toString()}%` }}
+              style={{ width: `${(rating * 20).toString()}%` }}
             >
             </span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={cardId}>{offer.title}</Link>
+          <Link to={cardId}>{title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
