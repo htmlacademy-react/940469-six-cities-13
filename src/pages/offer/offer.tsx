@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import Comment from '../../components/comment/comment';
 import { ApartmentReview } from '../../types/review';
 import ReviewList from '../../components/review-list/review-list';
+import Map from '../../components/map/map';
+import { CITY } from '../../mocks/city';
+import { ApartmentOffer } from '../../types/offer';
 
 type OfferProps = {
   reviews: ApartmentReview[];
+  offers: ApartmentOffer[];
 };
 
-export function Offer({ reviews }: OfferProps): JSX.Element {
+export function Offer({ reviews, offers }: OfferProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -192,7 +196,11 @@ export function Offer({ reviews }: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            city={CITY}
+            points={offers.slice(0, 3)}
+            classMap={'offer__map'}
+          />
         </section>
         <div className="container">
           <section className="near-places places">

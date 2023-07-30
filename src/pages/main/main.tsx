@@ -106,13 +106,12 @@ function Main({ rentalOffers, offers }: MainProps): JSX.Element {
               handleOnMouseMove={handleOnMouseMove}
             />
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={CITY}
-                  points={offers}
-                  selectedPoint={offerListActiveCard}
-                />
-              </section>
+              <Map
+                city={CITY}
+                points={offers}
+                selectedPoint={offerListActiveCard}
+                classMap={'cities__map'}
+              />
             </div>
           </div>
         </div>

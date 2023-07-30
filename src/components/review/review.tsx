@@ -5,6 +5,7 @@ type ReviewProps = {
 };
 
 //TODO: Написать функцию для преобразования даты в человекочитаемый формат.
+//TODO: Все вычисления будут собраны в функции и перенесены в компонент с функциями.
 
 export default function Review({ review }: ReviewProps) {
   const { id, user, rating, date, comment } = review;
