@@ -13,6 +13,9 @@ type OfferProps = {
   offers: ApartmentOffer[];
 };
 
+//TODO: Потом здесь будет вывод предложения по id.
+//TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
+
 export function Offer({ reviews, offers }: OfferProps): JSX.Element {
   return (
     <div className="page">
