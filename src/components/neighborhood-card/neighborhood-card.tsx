@@ -1,16 +1,10 @@
 import { ApartmentOffer } from '../../types/offer';
-import { Link } from 'react-router-dom';
-import { Authorization } from '../../const';
 import cn from 'classnames';
 
-type CardProps = {
+type NeighborhoodCardProps = {
   offer: ApartmentOffer;
-  handleOnMouseMove: (id: string) => void;
 };
-
-//TODO: Все вычисления будут собраны в функции и перенесены в компонент с функциями.
-
-function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
+export default function NeighborhoodCard({ offer }: NeighborhoodCardProps) {
   const {
     id,
     isPremium,
@@ -21,30 +15,23 @@ function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
     rating,
     type,
   } = offer;
-
-  const cardId = `${Authorization.Offer}/${id}`;
-
   return (
-    <article
-      key={id}
-      onMouseMove={() => handleOnMouseMove(id)}
-      className="cities__card place-card"
-    >
+    <article key={id} className="near-places__card place-card">
       {isPremium && (
         <div className="place-card__mark">
           <span>isPremium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={cardId}>
+      <div className="near-places__image-wrapper place-card__image-wrapper">
+        <a href="#">
           <img
             className="place-card__image"
             src={previewImage}
             width="260"
             height="200"
-            alt={title}
+            alt="Place image"
           />
-        </Link>
+        </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -71,12 +58,10 @@ function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={cardId}>{title}</Link>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
 }
-
-export default Card;

@@ -8,17 +8,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Authorization } from '../../const';
 import { ApartmentOffer } from '../../types/offer';
+import { ApartmentReview } from '../../types/review';
 
 type AppProps = {
   rentalOffers: number;
   offers: ApartmentOffer[];
-  /*reviews: ApartmentReview[];*/
+  reviews: ApartmentReview[];
 };
 
 //TODO: Потом в Offer, вероятно, будет динамическая маршрутизация.
 //TODO: А еще, нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
-function App({ rentalOffers, offers }: AppProps): JSX.Element {
+function App({ rentalOffers, offers, reviews }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -34,7 +35,7 @@ function App({ rentalOffers, offers }: AppProps): JSX.Element {
                 </PrivateRoute>
               }
             />
-            <Route path={`${Authorization.Offer}/:id`} element={<Offer />}></Route>
+            <Route path={`${Authorization.Offer}/:id`} element={<Offer reviews={reviews} offers={offers}/>}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>
