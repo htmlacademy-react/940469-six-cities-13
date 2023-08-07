@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import Card from '../../components/card/card';
 import { ApartmentOffer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
 type OfferListProps = {
-  rentalOffers: number;
   offers: ApartmentOffer[];
   handleOnMouseMove: (id: string) => void;
 };
 
 function OfferList({
-  rentalOffers,
   offers,
   handleOnMouseMove,
 }: OfferListProps): JSX.Element {
@@ -20,11 +19,13 @@ function OfferList({
     }
   }, [activeCard, handleOnMouseMove]);
 
+  const activeCity = useAppSelector((state) => state.city);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {rentalOffers} places to stay in Amsterdam
+        {offers.filter((offer) => offer.city.name === activeCity).length} places to stay in Amsterdam
       </b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
@@ -50,13 +51,15 @@ function OfferList({
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
-          <Card
-            offer={offer}
-            key={offer.id}
-            handleOnMouseMove={(id) => setActiveCard(id)}
-          />
-        ))}
+        {offers
+          .filter((offer) => offer.city.name === activeCity)
+          .map((offer) => (
+            <Card
+              offer={offer}
+              key={offer.id}
+              handleOnMouseMove={(id) => setActiveCard(id)}
+            />
+          ))}
         ;
       </div>
     </section>

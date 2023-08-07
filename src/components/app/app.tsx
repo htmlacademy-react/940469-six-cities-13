@@ -16,8 +16,7 @@ type AppProps = {
   reviews: ApartmentReview[];
 };
 
-//TODO: Потом в Offer, вероятно, будет динамическая маршрутизация.
-//TODO: А еще, нужно не забыть реализовать Layout, NavLink, Link и Suspense.
+//TODO: Нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
 function App({ rentalOffers, offers, reviews }: AppProps): JSX.Element {
   return (

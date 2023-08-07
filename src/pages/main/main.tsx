@@ -4,6 +4,8 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 import { CITY } from '../../mocks/city';
 import { ApartmentOffer } from '../../types/offer';
+import MainTabs from '../../components/main-tabs/main-tabs';
+import {useAppSelector} from '../../hooks';
 
 type MainProps = {
   rentalOffers: number;
@@ -12,9 +14,12 @@ type MainProps = {
 
 function Main({ rentalOffers, offers }: MainProps): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
+
   const handleOnMouseMove = (activeCard: string) => {
     setOfferListActiveCard(activeCard);
   };
+
+  const activeCity = useAppSelector((state) => state.city);
 
   return (
     <div className="page page--gray page--main">
@@ -62,42 +67,7 @@ function Main({ rentalOffers, offers }: MainProps): JSX.Element {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <MainTabs activeCity={activeCity}/>
         <div className="cities">
           <div className="cities__places-container container">
             <OfferList
