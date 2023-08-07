@@ -8,11 +8,10 @@ import MainTabs from '../../components/main-tabs/main-tabs';
 import {useAppSelector} from '../../hooks';
 
 type MainProps = {
-  rentalOffers: number;
   offers: ApartmentOffer[];
 };
 
-function Main({ rentalOffers, offers }: MainProps): JSX.Element {
+function Main({ offers }: MainProps): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
 
   const handleOnMouseMove = (activeCard: string) => {
@@ -72,13 +71,12 @@ function Main({ rentalOffers, offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <OfferList
               offers={offers}
-              rentalOffers={rentalOffers}
               handleOnMouseMove={handleOnMouseMove}
             />
             <div className="cities__right-section">
               <Map
                 city={CITY}
-                points={offers}
+                points={offers.filter((offer) => offer.city.name === activeCity)}
                 selectedPoint={offerListActiveCard}
                 classMap={'cities__map'}
               />
