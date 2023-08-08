@@ -23,7 +23,7 @@ const defaultCustomIcon = new Icon({
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [45, 45],
-  iconAnchor: [20, 40],
+  iconAnchor: [25, 45],
 });
 
 function Map(props: MapProps): JSX.Element {
