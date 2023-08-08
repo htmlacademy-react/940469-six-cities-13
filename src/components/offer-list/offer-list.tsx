@@ -20,16 +20,31 @@ function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const activeSorting = useAppSelector((state) => state.sorting);
 
+  function getSortingOffers(sorting: string) {
+    switch (sorting) {
+      case 'Price: low to high':
+        return [...offers].sort((a, b) => a.price > b.price ? 1 : -1);
+      case 'Price: high to low':
+        return [...offers].sort((a, b) => a.price < b.price ? 1 : -1);
+      case 'Top rated first':
+        return [...offers].sort((a, b) => b.rating > a.rating ? 1 : -1);
+      default:
+        return [...offers];
+    }
+  }
+
+  const sortingOffers = getSortingOffers(activeSorting);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {offers.filter((offer) => offer.city.name === activeCity).length} places
+        {sortingOffers.filter((offer) => offer.city.name === activeCity).length} places
         to stay in {activeCity}
       </b>
       <Sorting activeSorting={activeSorting} />
       <div className="cities__places-list places__list tabs__content">
-        {offers
+        {sortingOffers
           .filter((offer) => offer.city.name === activeCity)
           .map((offer) => (
             <Card
