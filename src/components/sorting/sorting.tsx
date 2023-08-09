@@ -1,0 +1,37 @@
+import { useAppDispatch} from '../../hooks';
+import { sorting } from '../../const';
+import { changeSorting } from '../../store/action';
+import cn from 'classnames';
+
+type SortingProps = {
+  activeSorting: string;
+};
+
+export default function Sorting({ activeSorting }: SortingProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  return (
+    <form className="places__sorting" action="#" method="get">
+      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-type" tabIndex={0}>
+        <svg className="places__sorting-arrow" width="7" height="4">
+          <use xlinkHref="#icon-arrow-select"></use>
+        </svg>
+      </span>
+      <ul className="places__options places__options--custom places__options--opened">
+        {sorting.map((sort) => (
+          <li
+            key={sort}
+            className={cn('places__option', {
+              'places__option--active': activeSorting === sort,
+            })}
+            tabIndex={0}
+            onClick={() => dispatch(changeSorting(sort))}
+          >
+            {sort}
+          </li>
+        ))}
+      </ul>
+    </form>
+  );
+}

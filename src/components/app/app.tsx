@@ -11,21 +11,19 @@ import { ApartmentOffer } from '../../types/offer';
 import { ApartmentReview } from '../../types/review';
 
 type AppProps = {
-  rentalOffers: number;
   offers: ApartmentOffer[];
   reviews: ApartmentReview[];
 };
 
-//TODO: Потом в Offer, вероятно, будет динамическая маршрутизация.
-//TODO: А еще, нужно не забыть реализовать Layout, NavLink, Link и Suspense.
+//TODO: Нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
-function App({ rentalOffers, offers, reviews }: AppProps): JSX.Element {
+function App({ offers, reviews }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={Authorization.Main}>
-            <Route index element={<Main offers ={offers} rentalOffers={rentalOffers}/>} />
+            <Route index element={<Main offers ={offers}/>} />
             <Route path={Authorization.Login} element={<Login />}></Route>
             <Route
               path={Authorization.Favorites}
