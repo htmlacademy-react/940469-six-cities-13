@@ -9,6 +9,8 @@ type OfferListProps = {
   handleOnMouseMove: (id: string) => void;
 };
 
+//TODO: Возможно, функцию сортировки лучше будет вынести в отдельный модуль, а результат сортировки сохранить в store.
+
 function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState('');
   useEffect(() => {
