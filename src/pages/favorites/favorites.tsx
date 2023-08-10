@@ -126,7 +126,8 @@ function Favorites(): JSX.Element {
                               style={{
                                 width: `${(offer.rating * 20).toString()}%`,
                               }}
-                            ></span>
+                            >
+                            </span>
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>

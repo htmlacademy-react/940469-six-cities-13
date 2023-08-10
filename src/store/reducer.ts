@@ -24,6 +24,6 @@ export const reducer = createReducer<InitialCityType>(
     });
     builder.addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
-    })
+    });
   },
 );
