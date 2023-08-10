@@ -19,3 +19,8 @@ export const setOffersDataLoadingStatus = createAction(
   'setOffersDataLoadingStatus',
   (data: boolean) => ({ payload: data }),
 );
+
+export const filterOffersList = createAction(
+  'filterOffersList',
+  (filtering: ApartmentOffer[]) => ({payload: filtering}),
+);

@@ -4,7 +4,6 @@ import Comment from '../../components/comment/comment';
 import { ApartmentReview } from '../../types/review';
 import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
-import { CITY } from '../../mocks/city';
 import NeighborhoodOfferList from '../../components/neighborhood-offer-list/neighborhood-offer-list';
 import { useAppSelector } from '../../hooks';
 
@@ -202,7 +201,6 @@ export function Offer({ reviews }: OfferProps): JSX.Element {
             </div>
           </div>
           <Map
-            city={CITY}
             points={offers.slice(0, 3)}
             classMap={'offer__map'}
           />

@@ -5,4 +5,5 @@ export type InitialCityType = {
   offers: ApartmentOffer[];
   sorting: string;
   isOffersDataLoading: boolean;
+  filteredOffers: ApartmentOffer[];
 };

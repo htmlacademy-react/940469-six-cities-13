@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
-import { CITY } from '../../mocks/city';
 import MainTabs from '../../components/main-tabs/main-tabs';
 import { useAppSelector } from '../../hooks';
 
@@ -67,10 +66,7 @@ function Main(): JSX.Element {
             <OfferList offers={offers} handleOnMouseMove={handleOnMouseMove} />
             <div className="cities__right-section">
               <Map
-                city={CITY}
-                points={offers.filter(
-                  (offer) => offer.city.name === activeCity,
-                )}
+                points={offers.filter((offer) => offer.city.name === activeCity)}
                 selectedPoint={offerListActiveCard}
                 classMap={'cities__map'}
               />
