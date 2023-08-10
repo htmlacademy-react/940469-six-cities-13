@@ -1,16 +1,14 @@
 import { Helmet } from 'react-helmet-async';
-import { ApartmentOffer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { Authorization } from '../../const';
 import cn from 'classnames';
-
-type FavoritesProps = {
-  offers: ApartmentOffer[];
-};
+import { useAppSelector } from '../../hooks';
 
 //TODO: Здесь потом будет реализована сортировка по городам. Все вычисления будут собраны в функции и перенесены в компонент с функциями.
 
-function Favorites({ offers }: FavoritesProps): JSX.Element {
+function Favorites(): JSX.Element {
+  const offers = useAppSelector((store) => store.offers);
+
   return (
     <div className="page">
       <Helmet>
@@ -128,8 +126,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                               style={{
                                 width: `${(offer.rating * 20).toString()}%`,
                               }}
-                            >
-                            </span>
+                            ></span>
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>

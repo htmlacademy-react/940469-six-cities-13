@@ -3,15 +3,10 @@ import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 import { CITY } from '../../mocks/city';
-import { ApartmentOffer } from '../../types/offer';
 import MainTabs from '../../components/main-tabs/main-tabs';
 import { useAppSelector } from '../../hooks';
 
-type MainProps = {
-  offers: ApartmentOffer[];
-};
-
-function Main({ offers }: MainProps): JSX.Element {
+function Main(): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
 
   const handleOnMouseMove = (activeCard: string) => {
@@ -19,6 +14,7 @@ function Main({ offers }: MainProps): JSX.Element {
   };
 
   const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((store) => store.offers);
 
   return (
     <div className="page page--gray page--main">
