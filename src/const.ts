@@ -69,3 +69,6 @@ export const sorting = [
   'Price: high to low',
   'Top rated first',
 ] as const;
+
+export const DATA_URL = 'https://13.design.pages.academy/six-cities';
+export const TIMEOUT = 5000;
