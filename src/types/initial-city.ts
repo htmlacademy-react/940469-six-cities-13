@@ -1,9 +1,10 @@
 import { ApartmentOffer } from './offer';
+import {AuthorizationStatus} from '../const';
 
 export type InitialCityType = {
   city: string;
   offers: ApartmentOffer[];
   sorting: string;
   isOffersDataLoading: boolean;
-  filteredOffers: ApartmentOffer[];
+  authorizationStatus: AuthorizationStatus;
 };

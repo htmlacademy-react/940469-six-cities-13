@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ApartmentOffer } from '../types/offer';
+import { AuthorizationStatus } from '../const';
 
 export const changeCity = createAction('changeCity', (city: string) => ({
   payload: city,
@@ -20,7 +21,9 @@ export const setOffersDataLoadingStatus = createAction(
   (data: boolean) => ({ payload: data }),
 );
 
-export const filterOffersList = createAction(
-  'filterOffersList',
-  (filtering: ApartmentOffer[]) => ({payload: filtering}),
+export const requireAuthorization = createAction(
+  'requireAuthorization',
+  (authorizationStatus: AuthorizationStatus) => ({
+    payload: authorizationStatus,
+  }),
 );

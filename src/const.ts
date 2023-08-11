@@ -79,3 +79,9 @@ export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 export enum APIRoute {
   Offers = '/offers',
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
