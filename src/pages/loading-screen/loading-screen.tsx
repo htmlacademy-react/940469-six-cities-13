@@ -1,6 +1,8 @@
 function LoadingScreen(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <center>
+      <h2>This page is loading ...</h2>
+    </center>
   );
 }
 
