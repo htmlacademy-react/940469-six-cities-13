@@ -1,6 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ApartmentOffer } from '../types/offer';
-import { AuthorizationStatus } from '../const';
 
 export const changeCity = createAction('changeCity', (city: string) => ({
   payload: city,
@@ -23,7 +22,14 @@ export const setOffersDataLoadingStatus = createAction(
 
 export const requireAuthorization = createAction(
   'requireAuthorization',
-  (authorizationStatus: AuthorizationStatus) => ({
+  (authorizationStatus: string) => ({
     payload: authorizationStatus,
+  }),
+);
+
+export const getUser = createAction(
+  'getUser',
+  (user: string) => ({
+    payload: user,
   }),
 );

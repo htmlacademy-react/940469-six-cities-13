@@ -1,6 +1,30 @@
 import { Helmet } from 'react-helmet-async';
+import { useAppDispatch } from '../../hooks';
+import { FormEvent, useRef } from 'react';
+import { Authorization } from '../../const';
+import { useNavigate } from 'react-router-dom';
+import { loginAction } from '../../services/api-action';
 
 function Login(): JSX.Element {
+  const password = useRef<HTMLInputElement | null>(null);
+  const email = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (email.current !== null && password.current !== null) {
+      dispatch(
+        loginAction({
+          email: email.current.value,
+          password: password.current.value,
+        }),
+      );
+      navigate(Authorization.Main);
+    }
+  };
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -28,10 +52,16 @@ function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={handleLoginSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  ref={email}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -42,6 +72,7 @@ function Login(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  ref={password}
                   className="login__input form__input"
                   type="password"
                   name="password"

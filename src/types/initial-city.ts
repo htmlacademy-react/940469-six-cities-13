@@ -7,4 +7,5 @@ export type InitialCityType = {
   sorting: string;
   isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
+  user: string;
 };

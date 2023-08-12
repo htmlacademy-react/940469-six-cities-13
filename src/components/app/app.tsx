@@ -33,12 +33,12 @@ function App({ reviews }: AppProps): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={Authorization.Main}>
-            <Route index element={<Main/>} />
+            <Route index element={<Main/>}/>
             <Route path={Authorization.Login} element={<Login />}></Route>
             <Route
               path={Authorization.Favorites}
               element={
-                <PrivateRoute isAuth>
+                <PrivateRoute isAuth={false}>
                   <Favorites/>
                 </PrivateRoute>
               }
