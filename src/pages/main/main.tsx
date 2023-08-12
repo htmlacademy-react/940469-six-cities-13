@@ -4,7 +4,7 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 import MainTabs from '../../components/main-tabs/main-tabs';
 import { useAppSelector } from '../../hooks';
-import Header from '../header/header';
+import Header from '../../components/header/header';
 
 function Main(): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');

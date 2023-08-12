@@ -8,3 +8,8 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type DetailMessageType = {
+  type: string;
+  message: string;
+}
