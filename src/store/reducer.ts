@@ -7,7 +7,8 @@ import {
   changeSorting,
   setOffersDataLoadingStatus,
   requireAuthorization,
-  getUser
+  getUser,
+  setError,
 } from './action';
 
 const initialCity: InitialCityType = {
@@ -17,6 +18,7 @@ const initialCity: InitialCityType = {
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: '',
+  error: '',
 };
 
 export const reducer = createReducer<InitialCityType>(
@@ -35,10 +37,13 @@ export const reducer = createReducer<InitialCityType>(
       state.isOffersDataLoading = action.payload;
     });
     builder.addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
+      state.authorizationStatus = <AuthorizationStatus>action.payload;
     });
     builder.addCase(getUser, (state, action) => {
       state.user = action.payload;
+    });
+    builder.addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
   },
 );

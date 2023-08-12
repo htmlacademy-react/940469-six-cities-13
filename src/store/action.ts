@@ -33,3 +33,8 @@ export const getUser = createAction(
     payload: user,
   }),
 );
+
+export const setError = createAction(
+  'setError',
+  (error: string) => ({payload: error}),
+);

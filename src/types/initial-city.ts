@@ -8,4 +8,5 @@ export type InitialCityType = {
   isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: string;
+  error: string;
 };
