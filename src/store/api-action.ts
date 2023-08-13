@@ -1,30 +1,17 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types';
-import { APIRoute, AuthorizationStatus, TIMEOUT } from '../const';
+import { APIRoute, AuthorizationStatus } from '../const';
 import {
   getOffersList,
   setOffersDataLoadingStatus,
   requireAuthorization,
   getUser,
-  setError,
-} from '../store/action';
+  redirectToRoute,
+} from './action';
 import { ApartmentOffer } from '../types/offer';
 import { AutorizationData, UserData } from '../types/autorization-data';
-import { saveToken, dropToken } from './token';
-import { store } from '../store';
-
-export const clearErrorAction = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('/clearError', () => {
-  setTimeout(() => store.dispatch(setError('')), TIMEOUT);
-});
+import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<
   void,
@@ -40,7 +27,7 @@ export const fetchOffersAction = createAsyncThunk<
   dispatch(setOffersDataLoadingStatus(false));
   dispatch(getOffersList(data));
 });
-
+/* Последний маршрут, возможно, не очень нужен и будет убран. */
 export const loginAction = createAsyncThunk<
   void,
   AutorizationData,
@@ -59,6 +46,7 @@ export const loginAction = createAsyncThunk<
   saveToken(token);
   dispatch(requireAuthorization(AuthorizationStatus.Auth));
   dispatch(getUser(email));
+  dispatch(redirectToRoute(APIRoute.Root));
 });
 
 export const logoutAction = createAsyncThunk<

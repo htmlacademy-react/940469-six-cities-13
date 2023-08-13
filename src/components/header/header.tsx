@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../services/api-action';
+import { logoutAction } from '../../store/api-action';
 import { AuthorizationStatus } from '../../const';
 import { APIRoute } from '../../const';
 

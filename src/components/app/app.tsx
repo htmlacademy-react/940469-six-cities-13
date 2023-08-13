@@ -4,12 +4,14 @@ import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import {useAppSelector} from '../../hooks';
 import { Authorization } from '../../const';
 import { ApartmentReview } from '../../types/review';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   reviews: ApartmentReview[];
@@ -30,7 +32,7 @@ function App({ reviews }: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={Authorization.Main}>
             <Route index element={<Main/>}/>
@@ -38,7 +40,7 @@ function App({ reviews }: AppProps): JSX.Element {
             <Route
               path={Authorization.Favorites}
               element={
-                <PrivateRoute isAuth={false}>
+                <PrivateRoute>
                   <Favorites/>
                 </PrivateRoute>
               }
@@ -47,7 +49,7 @@ function App({ reviews }: AppProps): JSX.Element {
             <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

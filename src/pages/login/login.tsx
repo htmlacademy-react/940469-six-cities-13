@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
 import { Authorization } from '../../const';
 import { useNavigate } from 'react-router-dom';
-import { loginAction } from '../../services/api-action';
+import { loginAction } from '../../store/api-action';
 
 function Login(): JSX.Element {
   const password = useRef<HTMLInputElement | null>(null);

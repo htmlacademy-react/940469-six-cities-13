@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ApartmentOffer } from '../types/offer';
+import { APIRoute } from '../const';
 
 export const changeCity = createAction('changeCity', (city: string) => ({
   payload: city,
@@ -27,14 +28,11 @@ export const requireAuthorization = createAction(
   }),
 );
 
-export const getUser = createAction(
-  'getUser',
-  (user: string) => ({
-    payload: user,
-  }),
-);
+export const getUser = createAction('getUser', (user: string) => ({
+  payload: user,
+}));
 
-export const setError = createAction(
-  'setError',
-  (error: string) => ({payload: error}),
+export const redirectToRoute = createAction(
+  'redirectToRoute',
+  (redirect: APIRoute) => ({ payload: redirect }),
 );

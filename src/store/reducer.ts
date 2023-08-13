@@ -8,7 +8,6 @@ import {
   setOffersDataLoadingStatus,
   requireAuthorization,
   getUser,
-  setError,
 } from './action';
 
 const initialCity: InitialCityType = {
@@ -18,7 +17,6 @@ const initialCity: InitialCityType = {
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: '',
-  error: '',
 };
 
 export const reducer = createReducer<InitialCityType>(
@@ -41,9 +39,6 @@ export const reducer = createReducer<InitialCityType>(
     });
     builder.addCase(getUser, (state, action) => {
       state.user = action.payload;
-    });
-    builder.addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
   },
 );
