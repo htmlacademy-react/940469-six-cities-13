@@ -4,6 +4,7 @@ import { FormEvent, useRef } from 'react';
 import { Authorization } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-action';
+import {Link} from 'react-router-dom';
 
 function Login(): JSX.Element {
   const password = useRef<HTMLInputElement | null>(null);
@@ -34,7 +35,7 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -42,7 +43,7 @@ function Login(): JSX.Element {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
