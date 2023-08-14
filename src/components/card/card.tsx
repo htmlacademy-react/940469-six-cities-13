@@ -27,7 +27,9 @@ function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
   return (
     <article
       key={id}
-      onMouseMove={() => handleOnMouseMove(id)}
+      onMouseMove={() => {
+        handleOnMouseMove(id);
+      }}
       className="cities__card place-card"
     >
       {isPremium && (
