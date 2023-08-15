@@ -4,12 +4,11 @@ import axios, {
   AxiosResponse,
   AxiosError,
 } from 'axios';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { DATA_URL, TIMEOUT } from '../const';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { DetailMessageType } from '../types/autorization-data';
-
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -40,7 +39,7 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.response.data);
+        const detailMessage = error.response.data;
 
         toast.warn(detailMessage.message);
       }

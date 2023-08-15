@@ -6,7 +6,7 @@ import Sorting from '../sorting/sorting';
 
 type OfferListProps = {
   offers: ApartmentOffer[];
-  handleOnMouseMove: (id: string | undefined) => void;
+  handleOnMouseMove: (id: string) => void;
 };
 
 //TODO: Возможно, функцию сортировки лучше будет вынести в отдельный модуль, а результат сортировки сохранить в store.
@@ -17,8 +17,6 @@ function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   useEffect(() => {
     if (activeCard) {
       handleOnMouseMove(activeCard);
-    } else {
-      handleOnMouseMove(undefined);
     }
   }, [activeCard, handleOnMouseMove]);
 
@@ -48,9 +46,6 @@ function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   return (
     <section
       className="cities__places places"
-      onMouseMove={() => {
-        handleOnMouseMove(undefined);
-      }}
     >
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">

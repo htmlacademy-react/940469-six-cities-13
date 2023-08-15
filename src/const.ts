@@ -76,6 +76,8 @@ export const TIMEOUT = 5000;
 
 export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
+export const AUTH_EMAIL_KEY_NAME = 'six-cities-email';
+
 export enum APIRoute {
   Offers = '/offers',
   AuthorizationData = '/login',

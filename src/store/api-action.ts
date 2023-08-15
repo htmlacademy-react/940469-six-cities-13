@@ -12,6 +12,7 @@ import {
 import { ApartmentOffer } from '../types/offer';
 import { AutorizationData, UserData } from '../types/autorization-data';
 import { saveToken, dropToken } from '../services/token';
+import {dropLogin, saveLogin} from '../services/login';
 
 export const fetchOffersAction = createAsyncThunk<
   void,
@@ -44,6 +45,7 @@ export const loginAction = createAsyncThunk<
     password,
   });
   saveToken(token);
+  saveLogin(email);
   dispatch(requireAuthorization(AuthorizationStatus.Auth));
   dispatch(getUser(email));
   dispatch(redirectToRoute(APIRoute.Root));
@@ -60,6 +62,7 @@ export const logoutAction = createAsyncThunk<
 >('user/logout', async (_arg, { dispatch, extra: api }) => {
   await api.delete(APIRoute.Logout);
   dropToken();
+  dropLogin();
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   dispatch(getUser(''));
 });

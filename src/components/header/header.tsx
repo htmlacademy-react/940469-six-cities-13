@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { AuthorizationStatus } from '../../const';
 import { APIRoute } from '../../const';
+import {getLogin} from '../../services/login';
 
 export default function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(
@@ -37,7 +38,7 @@ export default function Header(): JSX.Element {
                     >
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__user-name user__name">
-                        {user ? user : 'John.doe@gmail.com'}
+                        {user ? user : getLogin()}
                       </span>
                       <span className="header__favorite-count">3</span>
                     </Link>
