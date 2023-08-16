@@ -8,7 +8,6 @@ import Header from '../../components/header/header';
 
 function Main(): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
-
   const handleOnMouseMove = (activeCard: string) => {
     setOfferListActiveCard(activeCard);
   };
@@ -21,7 +20,7 @@ function Main(): JSX.Element {
       <Helmet>
         <title>6 Cities</title>
       </Helmet>
-      <Header/>
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <MainTabs activeCity={activeCity} />
@@ -30,7 +29,9 @@ function Main(): JSX.Element {
             <OfferList offers={offers} handleOnMouseMove={handleOnMouseMove} />
             <div className="cities__right-section">
               <Map
-                points={offers.filter((offer) => offer.city.name === activeCity)}
+                points={offers.filter(
+                  (offer) => offer.city.name === activeCity,
+                )}
                 selectedPoint={offerListActiveCard}
                 classMap={'cities__map'}
               />

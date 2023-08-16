@@ -11,10 +11,10 @@ export type ApartmentOffer = {
   rating: number;
   images: string[];
   description: string;
-  goods: string[];
   host: OfferHost;
   bedrooms: number;
   maxAdults: number;
+  goods: string[];
 };
 
 export type OfferLocation = {

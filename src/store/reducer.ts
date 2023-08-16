@@ -8,6 +8,10 @@ import {
   setOffersDataLoadingStatus,
   requireAuthorization,
   getUser,
+  getOffer,
+  getReviews,
+  getNeighborhoodOffers,
+  setDataLoadingStatus,
 } from './action';
 
 const initialCity: InitialCityType = {
@@ -17,6 +21,10 @@ const initialCity: InitialCityType = {
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: '',
+  oneOffer: null,
+  offerReviews: [],
+  neighborhoodOffers: [],
+  isDataLoading: false,
 };
 
 export const reducer = createReducer<InitialCityType>(
@@ -39,6 +47,18 @@ export const reducer = createReducer<InitialCityType>(
     });
     builder.addCase(getUser, (state, action) => {
       state.user = action.payload;
+    });
+    builder.addCase(getOffer, (state, action) => {
+      state.oneOffer = action.payload;
+    });
+    builder.addCase(getReviews, (state, action) => {
+      state.offerReviews = action.payload;
+    });
+    builder.addCase(getNeighborhoodOffers, (state, action) => {
+      state.neighborhoodOffers = action.payload;
+    });
+    builder.addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoading = action.payload;
     });
   },
 );
