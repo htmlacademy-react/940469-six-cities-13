@@ -9,6 +9,7 @@ import { fetchOfferAction } from '../../store/api-action';
 import { useEffect } from 'react';
 import Header from '../../components/header/header';
 import cn from 'classnames';
+import NotFound from '../not-found/not-found';
 
 //TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
 
@@ -28,6 +29,12 @@ export function Offer(): JSX.Element {
     }
   }, [dispatch, params.id]);
 
+  if (params.id !== undefined) {
+    if (offers.findIndex((id) => id.id === params.id) === -1) {
+      return <NotFound />;
+    }
+  }
+
   return (
     <div className="page">
       <Helmet>
@@ -40,7 +47,10 @@ export function Offer(): JSX.Element {
             <div className="offer__gallery">
               {offer !== null
                 ? offer.images.map((image) => (
-                  <div className="offer__image-wrapper" key={offer.id}>
+                  <div
+                    className="offer__image-wrapper"
+                    key={self.crypto.randomUUID()}
+                  >
                     <img
                       className="offer__image"
                       src={image}
@@ -122,7 +132,10 @@ export function Offer(): JSX.Element {
                 <ul className="offer__inside-list">
                   {offer !== null
                     ? offer.goods.map((good) => (
-                      <li className="offer__inside-item" key={offer.id}>
+                      <li
+                        className="offer__inside-item"
+                        key={self.crypto.randomUUID()}
+                      >
                         {good}
                       </li>
                     ))
