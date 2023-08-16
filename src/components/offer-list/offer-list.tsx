@@ -44,9 +44,7 @@ function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   const sortingOffers = getSortingOffers(activeSorting);
 
   return (
-    <section
-      className="cities__places places"
-    >
+    <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
         {sortingOffers.length} places to stay in {activeCity}

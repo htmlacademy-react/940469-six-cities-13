@@ -11,6 +11,7 @@ type SortingProps = {
 export default function Sorting({ activeSorting }: SortingProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [toggle, setToggle] = useState(false);
+  const handleToggle = () => setToggle(!toggle);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -18,7 +19,7 @@ export default function Sorting({ activeSorting }: SortingProps): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => setToggle(!toggle)}
+        onClick={handleToggle}
       >
         {activeSorting}
         <svg className="places__sorting-arrow" width="7" height="4">

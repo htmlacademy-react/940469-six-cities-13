@@ -1,4 +1,4 @@
-function LoadingScreen(): JSX.Element {
+function Spinner(): JSX.Element {
   return (
     <center>
       <h2>This page is loading ...</h2>
@@ -6,4 +6,4 @@ function LoadingScreen(): JSX.Element {
   );
 }
 
-export default LoadingScreen;
+export default Spinner;

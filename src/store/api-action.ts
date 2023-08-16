@@ -1,20 +1,23 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types';
-import {APIRoute, AuthorizationStatus} from '../const';
+import { APIRoute, AuthorizationStatus } from '../const';
 import {
   getOffersList,
   setOffersDataLoadingStatus,
   requireAuthorization,
   getUser,
   redirectToRoute,
-  getOffer, getReviews, getNeighborhoodOffers,setDataLoadingStatus,
+  getOffer,
+  getReviews,
+  getNeighborhoodOffers,
+  setDataLoadingStatus,
 } from './action';
 import { ApartmentOffer } from '../types/offer';
 import { AutorizationData, UserData } from '../types/autorization-data';
 import { saveToken, dropToken } from '../services/token';
-import {dropLogin, saveLogin} from '../services/login';
-import {ApartmentReview} from '../types/review';
+import { dropLogin, saveLogin } from '../services/login';
+import { ApartmentReview } from '../types/review';
 
 export const fetchOffersAction = createAsyncThunk<
   void,
@@ -40,9 +43,15 @@ export const fetchOfferAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('offer/getOffer', async (id, { dispatch, extra: api }) => {
-  const {data: oneOffer} = await api.get<ApartmentOffer>(`${APIRoute.Offers}/${id}`);
-  const {data: offerReviews} = await api.get<ApartmentReview[]>(`${APIRoute.Comments}/${id}`);
-  const {data: neighborhoodOffers} = await api.get<ApartmentOffer[]>(`${APIRoute.Offers}/${id}/nearby`);
+  const { data: oneOffer } = await api.get<ApartmentOffer>(
+    `${APIRoute.Offers}/${id}`,
+  );
+  const { data: offerReviews } = await api.get<ApartmentReview[]>(
+    `${APIRoute.Comments}/${id}`,
+  );
+  const { data: neighborhoodOffers } = await api.get<ApartmentOffer[]>(
+    `${APIRoute.Offers}/${id}/nearby`,
+  );
   dispatch(setDataLoadingStatus(true));
   dispatch(getOffer(oneOffer));
   dispatch(getReviews(offerReviews));

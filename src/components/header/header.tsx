@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { AuthorizationStatus } from '../../const';
 import { APIRoute } from '../../const';
-import {getLogin} from '../../services/login';
+import { getLogin } from '../../services/login';
 
 export default function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(
@@ -17,7 +17,10 @@ export default function Header(): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link header__logo-link--active" to='/'>
+            <Link
+              className="header__logo-link header__logo-link--active"
+              to="/"
+            >
               <img
                 className="header__logo"
                 src="img/logo.svg"

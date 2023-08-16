@@ -12,4 +12,4 @@ export type UserData = {
 export type DetailMessageType = {
   type: string;
   message: string;
-}
+};

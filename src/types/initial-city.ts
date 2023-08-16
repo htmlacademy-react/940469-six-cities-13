@@ -1,6 +1,6 @@
 import { ApartmentOffer } from './offer';
 import { AuthorizationStatus } from '../const';
-import {ApartmentReview} from './review';
+import { ApartmentReview } from './review';
 
 export type InitialCityType = {
   city: string;

@@ -1,11 +1,11 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
-import {Map, TileLayer} from 'leaflet';
-import {OfferCity} from '../types/offer';
-import {URL_TITLE_LAYER, OPEN_STREET_MAP} from '../const';
+import { useEffect, useState, MutableRefObject, useRef } from 'react';
+import { Map, TileLayer } from 'leaflet';
+import { OfferCity } from '../types/offer';
+import { URL_TITLE_LAYER, OPEN_STREET_MAP } from '../const';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: OfferCity
+  city: OfferCity,
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
@@ -15,18 +15,14 @@ function useMap(
       const instance = new Map(mapRef.current, {
         center: {
           lat: city.location.latitude,
-          lng: city.location.longitude
+          lng: city.location.longitude,
         },
-        zoom: city.location.zoom
+        zoom: city.location.zoom,
       });
 
-      const layer = new TileLayer(
-        URL_TITLE_LAYER,
-        {
-          attribution:
-          OPEN_STREET_MAP
-        }
-      );
+      const layer = new TileLayer(URL_TITLE_LAYER, {
+        attribution: OPEN_STREET_MAP,
+      });
 
       instance.addLayer(layer);
 
@@ -37,7 +33,10 @@ function useMap(
 
   useEffect(() => {
     if (map && city) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.setView(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom,
+      );
     }
   }, [city, map]);
 

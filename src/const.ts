@@ -39,8 +39,7 @@ export const stars: ReviewStar[] = [
   },
 ];
 
-export const URL_MARKER_DEFAULT =
-  'img/pin.svg';
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
@@ -84,7 +83,7 @@ export enum APIRoute {
   Logout = '/logout',
   Favorites = 'favorites',
   Root = '/',
-  Comments = '/comments'
+  Comments = '/comments',
 }
 
 export enum AuthorizationStatus {

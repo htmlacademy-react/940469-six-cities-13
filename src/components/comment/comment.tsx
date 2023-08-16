@@ -1,26 +1,26 @@
 import { useState, ChangeEvent } from 'react';
 import Rating from '../rating/rating';
-import {stars} from '../../const';
+import { stars } from '../../const';
 
 type comment = {
   comment: string;
 };
 
 function Comment(): JSX.Element {
-
   const [, setComment] = useState<comment>();
 
-  const handleInput = () => ({target}: ChangeEvent<HTMLTextAreaElement>) => {
-    const comment = target.value;
-    setComment((inputComment) => ({...inputComment, comment}));
-  };
+  const handleInput =
+    () => ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+      const comment = target.value;
+      setComment((inputComment) => ({ ...inputComment, comment }));
+    };
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <Rating stars={stars}/>
+      <Rating stars={stars} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"

@@ -18,7 +18,9 @@ export function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
   const offer = useAppSelector((state) => state.oneOffer);
   const reviews = useAppSelector((state) => state.offerReviews);
-  const neighborhoodOffers = useAppSelector((state) => state.neighborhoodOffers);
+  const neighborhoodOffers = useAppSelector(
+    (state) => state.neighborhoodOffers,
+  );
 
   useEffect(() => {
     if (params.id !== undefined) {
@@ -62,18 +64,25 @@ export function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {offer !== null ? offer.title : ''}
                 </h1>
-                {offer !== null ?
+                {offer !== null ? (
                   <button
                     className={cn('offer__bookmark-button button', {
                       'offer__bookmark-button--active': offer.isFavorite,
                     })}
                     type="button"
                   >
-                    <svg className="offer__bookmark-icon" width="31" height="33">
+                    <svg
+                      className="offer__bookmark-icon"
+                      width="31"
+                      height="33"
+                    >
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
-                  </button> : ''}
+                  </button>
+                ) : (
+                  ''
+                )}
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

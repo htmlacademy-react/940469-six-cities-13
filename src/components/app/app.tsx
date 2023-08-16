@@ -8,19 +8,29 @@ import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import { Authorization } from '../../const';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import Spinner from '../../pages/spinner/spinner';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import { store } from '../../store';
+import {
+  checkAuthorizationAction,
+  fetchOffersAction,
+} from '../../store/api-action';
 
 //TODO: Нужно не забыть реализовать Layout, NavLink, Link и Suspense.
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthorizationAction());
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(
     (state) => state.isOffersDataLoading,
   );
 
-  if (isOffersDataLoading) {
-    return <LoadingScreen />;
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+
+  if (isOffersDataLoading || isDataLoading) {
+    return <Spinner />;
   }
 
   return (
