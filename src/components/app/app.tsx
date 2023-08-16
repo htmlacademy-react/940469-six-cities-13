@@ -6,34 +6,44 @@ import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import {useAppSelector} from '../../hooks';
 import { Authorization } from '../../const';
-import { ApartmentOffer } from '../../types/offer';
 import { ApartmentReview } from '../../types/review';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppProps = {
-  offers: ApartmentOffer[];
   reviews: ApartmentReview[];
 };
 
 //TODO: Нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
-function App({ offers, reviews }: AppProps): JSX.Element {
+function App({ reviews }: AppProps): JSX.Element {
+
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={Authorization.Main}>
-            <Route index element={<Main offers ={offers}/>} />
+            <Route index element={<Main/>} />
             <Route path={Authorization.Login} element={<Login />}></Route>
             <Route
               path={Authorization.Favorites}
               element={
                 <PrivateRoute isAuth>
-                  <Favorites offers ={offers}/>
+                  <Favorites/>
                 </PrivateRoute>
               }
             />
-            <Route path={`${Authorization.Offer}/:id`} element={<Offer reviews={reviews} offers={offers}/>}></Route>
+            <Route path={`${Authorization.Offer}/:id`} element={<Offer reviews={reviews}/>}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>

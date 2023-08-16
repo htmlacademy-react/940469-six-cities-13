@@ -2,16 +2,10 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
-import { CITY } from '../../mocks/city';
-import { ApartmentOffer } from '../../types/offer';
 import MainTabs from '../../components/main-tabs/main-tabs';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
-type MainProps = {
-  offers: ApartmentOffer[];
-};
-
-function Main({ offers }: MainProps): JSX.Element {
+function Main(): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
 
   const handleOnMouseMove = (activeCard: string) => {
@@ -19,6 +13,7 @@ function Main({ offers }: MainProps): JSX.Element {
   };
 
   const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((store) => store.offers);
 
   return (
     <div className="page page--gray page--main">
@@ -65,16 +60,12 @@ function Main({ offers }: MainProps): JSX.Element {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <MainTabs activeCity={activeCity}/>
+        <MainTabs activeCity={activeCity} />
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList
-              offers={offers}
-              handleOnMouseMove={handleOnMouseMove}
-            />
+            <OfferList offers={offers} handleOnMouseMove={handleOnMouseMove} />
             <div className="cities__right-section">
               <Map
-                city={CITY}
                 points={offers.filter((offer) => offer.city.name === activeCity)}
                 selectedPoint={offerListActiveCard}
                 classMap={'cities__map'}

@@ -4,19 +4,19 @@ import Comment from '../../components/comment/comment';
 import { ApartmentReview } from '../../types/review';
 import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
-import { CITY } from '../../mocks/city';
-import { ApartmentOffer } from '../../types/offer';
 import NeighborhoodOfferList from '../../components/neighborhood-offer-list/neighborhood-offer-list';
+import { useAppSelector } from '../../hooks';
 
 type OfferProps = {
   reviews: ApartmentReview[];
-  offers: ApartmentOffer[];
 };
 
 //TODO: Потом здесь будет вывод предложения по id.
 //TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
 
-export function Offer({ reviews, offers }: OfferProps): JSX.Element {
+export function Offer({ reviews }: OfferProps): JSX.Element {
+  const offers = useAppSelector((store) => store.offers);
+
   return (
     <div className="page">
       <Helmet>
@@ -201,7 +201,6 @@ export function Offer({ reviews, offers }: OfferProps): JSX.Element {
             </div>
           </div>
           <Map
-            city={CITY}
             points={offers.slice(0, 3)}
             classMap={'offer__map'}
           />
