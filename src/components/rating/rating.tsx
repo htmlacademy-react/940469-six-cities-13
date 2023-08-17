@@ -6,8 +6,7 @@ type RatingProps = {
   setRating: (rating: number) => void;
 };
 
-export default function Rating({ stars, setRating}: RatingProps): JSX.Element {
-
+export default function Rating({ stars, setRating }: RatingProps): JSX.Element {
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const rating = Number(target.value);
     setRating(+rating);
