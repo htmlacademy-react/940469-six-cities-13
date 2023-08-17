@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { DATA_URL, TIMEOUT } from '../const';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
-import { DetailMessageType } from '../types/autorization-data';
+import { DetailMessageType } from '../types/authorization-data';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,

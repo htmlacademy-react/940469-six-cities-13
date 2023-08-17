@@ -14,10 +14,11 @@ import {
   setDataLoadingStatus,
 } from './action';
 import { ApartmentOffer } from '../types/offer';
-import { AutorizationData, UserData } from '../types/autorization-data';
+import { AuthorizationData, UserData } from '../types/authorization-data';
 import { saveToken, dropToken } from '../services/token';
 import { dropLogin, saveLogin } from '../services/login';
 import { ApartmentReview } from '../types/review';
+import { CommentData } from '../types/comment-data';
 
 export const fetchOffersAction = createAsyncThunk<
   void,
@@ -62,7 +63,7 @@ export const fetchOfferAction = createAsyncThunk<
 /* Последний маршрут, возможно, не очень нужен и будет убран. */
 export const loginAction = createAsyncThunk<
   void,
-  AutorizationData,
+  AuthorizationData,
   {
     dispatch: AppDispatch;
     state: State;
@@ -114,3 +115,22 @@ export const checkAuthorizationAction = createAsyncThunk<
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
 });
+
+export const sendComment = createAsyncThunk<
+  void,
+  CommentData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'comment/sendComment',
+  async ({ comment, rating, id }, { dispatch, extra: api }) => {
+    await api.post<CommentData>(`${APIRoute.Comments}/${id}`, {
+      comment,
+      rating,
+    });
+    dispatch(fetchOfferAction(id));
+  },
+);

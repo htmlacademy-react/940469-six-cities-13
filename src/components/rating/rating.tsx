@@ -1,14 +1,24 @@
 import { ReviewStar } from '../../types/star';
+import { ChangeEvent } from 'react';
 
 type RatingProps = {
   stars: ReviewStar[];
+  setRating: (rating: number) => void;
 };
-export default function Rating({ stars }: RatingProps): JSX.Element {
+
+export default function Rating({ stars, setRating}: RatingProps): JSX.Element {
+
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const rating = Number(target.value);
+    setRating(+rating);
+  };
+
   return (
     <div className="reviews__rating-form form__rating">
       {stars.map((star) => (
         <div key={star.id}>
           <input
+            onChange={handleChange}
             className="form__rating-input visually-hidden"
             name="rating"
             value={star.mark}

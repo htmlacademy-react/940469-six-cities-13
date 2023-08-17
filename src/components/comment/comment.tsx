@@ -1,32 +1,54 @@
 import { useState, ChangeEvent } from 'react';
 import Rating from '../rating/rating';
 import { stars } from '../../const';
+import { sendComment } from '../../store/api-action';
+import { useAppDispatch } from '../../hooks';
+import { FormEvent } from 'react';
 
-type comment = {
-  comment: string;
+type CommentProps = {
+  id: string;
 };
 
-function Comment(): JSX.Element {
-  const [, setComment] = useState<comment>();
+function Comment({ id }: CommentProps): JSX.Element {
+  const initialState = { id: id, comment: '', rating: 0 };
 
-  const handleInput =
-    () => ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
-      const comment = target.value;
-      setComment((inputComment) => ({ ...inputComment, comment }));
-    };
+  const [commentData, setCommentData] = useState(initialState);
+
+  const setRating = (value: number) => {
+    setCommentData((inputComment) => ({ ...inputComment, rating: value }));
+  };
+  const handleChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+    const comment = target.value;
+    setCommentData((inputComment) => ({ ...inputComment, comment }));
+  };
+
+  const { comment, rating } = commentData;
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (id) {
+      dispatch(sendComment({ id: id, comment, rating }));
+    }
+  };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <Rating stars={stars} />
+      <Rating stars={stars} setRating={setRating} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onInput={handleInput}
+        onChange={handleChange}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -35,11 +57,7 @@ function Comment(): JSX.Element {
           <span className="reviews__star">rating</span> and describe your stay
           with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button
-          className="reviews__submit form__submit button"
-          type="submit"
-          disabled
-        >
+        <button className="reviews__submit form__submit button" type="submit">
           Submit
         </button>
       </div>

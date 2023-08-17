@@ -171,7 +171,7 @@ export function Offer(): JSX.Element {
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={reviews} />
-                <Comment />
+                <Comment id={offer !== null ? offer.id : ''}/>
               </section>
             </div>
           </div>

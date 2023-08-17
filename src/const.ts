@@ -84,7 +84,6 @@ export enum APIRoute {
   Favorites = 'favorites',
   Root = '/',
   Comments = '/comments',
-  NotFound = '/notfound',
 }
 
 export enum AuthorizationStatus {
