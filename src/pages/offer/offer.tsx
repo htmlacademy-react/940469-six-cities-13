@@ -19,6 +19,7 @@ export function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
   const offer = useAppSelector((state) => state.oneOffer);
   const reviews = useAppSelector((state) => state.offerReviews);
+
   const neighborhoodOffers = useAppSelector(
     (state) => state.neighborhoodOffers,
   );

@@ -1,9 +1,8 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Rating from '../rating/rating';
-import { stars } from '../../const';
+import { AuthorizationStatus, stars } from '../../const';
 import { sendComment } from '../../store/api-action';
-import { useAppDispatch } from '../../hooks';
-import { FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 type CommentProps = {
   id: string;
@@ -31,38 +30,51 @@ function Comment({ id }: CommentProps): JSX.Element {
       dispatch(sendComment({ id: id, comment, rating }));
     }
   };
-
-  return (
-    <form
-      className="reviews__form form"
-      action="#"
-      method="post"
-      onSubmit={handleSubmit}
-    >
-      <label className="reviews__label form__label" htmlFor="review">
-        Your review
-      </label>
-      <Rating stars={stars} setRating={setRating} />
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleChange}
+  const isAuthorization = useAppSelector((state) => state.authorizationStatus);
+  if (isAuthorization === AuthorizationStatus.Auth) {
+    return (
+      <form
+        className="reviews__form form"
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
       >
-      </textarea>
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set{' '}
-          <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button className="reviews__submit form__submit button" type="submit">
-          Submit
-        </button>
+        <label className="reviews__label form__label" htmlFor="review">
+          Your review
+        </label>
+        <Rating stars={stars} setRating={setRating} />
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={handleChange}
+        ></textarea>
+        <div className="reviews__button-wrapper">
+          <p className="reviews__help">
+            To submit review please make sure to set{' '}
+            <span className="reviews__star">rating</span> and describe your stay
+            with at least <b className="reviews__text-amount">50 characters</b>.
+          </p>
+          <button className="reviews__submit form__submit button" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    );
+  } else {
+    return (
+      <div>
+        <strong>
+          <p>
+            Здесь должна быть форма для отправки комментариев, но она доступна
+            только зарегистрированным пользователям.
+          </p>
+          <p>Пожалуйста авторизуйтесь, чтобы оставить комментарий.</p>
+        </strong>
       </div>
-    </form>
-  );
+    );
+  }
 }
 
 export default Comment;
