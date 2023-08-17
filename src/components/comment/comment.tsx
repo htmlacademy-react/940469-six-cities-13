@@ -68,10 +68,9 @@ function Comment({ id }: CommentProps): JSX.Element {
       <div>
         <strong>
           <p>
-            Здесь должна быть форма для отправки комментариев, но она доступна
-            только зарегистрированным пользователям.
+            There should be reviews form, but only for registered users.
           </p>
-          <p>Пожалуйста авторизуйтесь, чтобы оставить комментарий.</p>
+          <p>Please register! You will be able to use form and leave your review.</p>
         </strong>
       </div>
     );
