@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Comment from '../../components/comment/comment';
 import ReviewList from '../../components/review-list/review-list';
-import Map from '../../components/map/map';
 import NeighborhoodOfferList from '../../components/neighborhood-offer-list/neighborhood-offer-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchOfferAction } from '../../store/api-action';
@@ -10,6 +9,7 @@ import { useEffect } from 'react';
 import Header from '../../components/header/header';
 import cn from 'classnames';
 import NotFound from '../not-found/not-found';
+import Map from '../../components/map/map';
 
 //TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
 
@@ -35,7 +35,6 @@ export function Offer(): JSX.Element {
       return <NotFound />;
     }
   }
-
   return (
     <div className="page">
       <Helmet>
@@ -172,19 +171,22 @@ export function Offer(): JSX.Element {
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={reviews} />
-                <Comment id={offer !== null ? offer.id : ''}/>
+                <Comment id={offer !== null ? offer.id : ''} />
               </section>
             </div>
           </div>
-          <Map points={offers.slice(0, 3)} classMap={'offer__map'} />
+          {offer !== null ? (
+            <Map
+              points={neighborhoodOffers.slice(0, 3)}
+              classMap={'offer__map'}
+              city={neighborhoodOffers[0].city}
+            />
+          ) : (
+            <div></div>
+          )}
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-              Other places in the neighbourhood
-            </h2>
-            <NeighborhoodOfferList offers={neighborhoodOffers} />
-          </section>
+          <NeighborhoodOfferList offers={neighborhoodOffers} />
         </div>
       </main>
     </div>

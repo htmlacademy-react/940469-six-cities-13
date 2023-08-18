@@ -14,6 +14,9 @@ function Main(): JSX.Element {
 
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((store) => store.offers);
+  const filteredOffer = offers.filter(
+    (offer) => offer.city.name === activeCity
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -33,6 +36,7 @@ function Main(): JSX.Element {
                   (offer) => offer.city.name === activeCity,
                 )}
                 selectedPoint={offerListActiveCard}
+                city = {filteredOffer[0].city}
                 classMap={'cities__map'}
               />
             </div>
