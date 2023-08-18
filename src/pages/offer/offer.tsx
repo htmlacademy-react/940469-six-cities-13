@@ -10,6 +10,7 @@ import Header from '../../components/header/header';
 import cn from 'classnames';
 import NotFound from '../not-found/not-found';
 import Map from '../../components/map/map';
+import './offer.css';
 
 //TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
 
@@ -35,6 +36,8 @@ export function Offer(): JSX.Element {
       return <NotFound />;
     }
   }
+
+  const mapArray = [offer, ...neighborhoodOffers];
   return (
     <div className="page">
       <Helmet>
@@ -177,7 +180,8 @@ export function Offer(): JSX.Element {
           </div>
           {offer !== null ? (
             <Map
-              points={neighborhoodOffers.slice(0, 3)}
+              selectedPoint={offer.id}
+              points={mapArray.slice(0,4)}
               classMap={'offer__map'}
               city={neighborhoodOffers[0].city}
             />
