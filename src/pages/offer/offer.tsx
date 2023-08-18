@@ -11,6 +11,7 @@ import cn from 'classnames';
 import NotFound from '../not-found/not-found';
 import Map from '../../components/map/map';
 import './offer.css';
+import {ApartmentOffer} from '../../types/offer';
 
 //TODO: Компоненты «Список предложений неподалёку», «Карточка предложения неподалёку», «Карточка предложения» и «Список предложений» нужно отрефакторить.
 
@@ -18,12 +19,14 @@ export function Offer(): JSX.Element {
   const offers = useAppSelector((store) => store.offers);
   const params = useParams();
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.oneOffer);
+  const offer = useAppSelector((state) => state.oneOffer) as ApartmentOffer;
   const reviews = useAppSelector((state) => state.offerReviews);
 
   const neighborhoodOffers = useAppSelector(
     (state) => state.neighborhoodOffers,
   );
+
+  const mapArray = [offer, ...neighborhoodOffers].slice(0,4);
 
   useEffect(() => {
     if (params.id !== undefined) {
@@ -37,7 +40,6 @@ export function Offer(): JSX.Element {
     }
   }
 
-  const mapArray = [offer, ...neighborhoodOffers];
   return (
     <div className="page">
       <Helmet>
@@ -173,7 +175,7 @@ export function Offer(): JSX.Element {
                   Reviews &middot;{' '}
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewList reviews={reviews} />
+                <ReviewList reviews={reviews.slice(0, 10)} />
                 <Comment id={offer !== null ? offer.id : ''} />
               </section>
             </div>
@@ -181,7 +183,7 @@ export function Offer(): JSX.Element {
           {offer !== null ? (
             <Map
               selectedPoint={offer.id}
-              points={mapArray.slice(0,4)}
+              points={mapArray}
               classMap={'offer__map'}
               city={neighborhoodOffers[0].city}
             />
