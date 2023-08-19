@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import { Authorization } from '../../const';
-import Spinner from '../../pages/spinner/spinner';
+import Spinner from '../spinner/spinner';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { store } from '../../store';

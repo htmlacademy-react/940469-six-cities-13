@@ -103,7 +103,7 @@ export function Offer(): JSX.Element {
                 <div className="offer__stars rating__stars">
                   {offer !== null ? (
                     <span
-                      style={{ width: `${(offer.rating * 20).toString()}%` }}
+                      style={{ width: `${(Math.round(offer.rating) * 20).toString()}%` }}
                     >
                     </span>
                   ) : (

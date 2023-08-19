@@ -1,10 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import { FormEvent, useRef } from 'react';
-import { Authorization } from '../../const';
+import {Authorization, AuthorizationStatus} from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-action';
 import { Link } from 'react-router-dom';
+import Main from '../main/main';
 
 function Login(): JSX.Element {
   const password = useRef<HTMLInputElement | null>(null);
@@ -12,6 +13,8 @@ function Login(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const isAuthorization = useAppSelector((state) => state.authorizationStatus);
 
   const handleLoginSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -25,6 +28,10 @@ function Login(): JSX.Element {
       navigate(Authorization.Main);
     }
   };
+
+  if (isAuthorization === AuthorizationStatus.Auth) {
+    return <Main/>;
+  }
 
   return (
     <div className="page page--gray page--login">

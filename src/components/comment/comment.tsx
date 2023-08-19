@@ -22,6 +22,7 @@ function Comment({ id }: CommentProps): JSX.Element {
   };
 
   const { comment, rating } = commentData;
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -30,7 +31,9 @@ function Comment({ id }: CommentProps): JSX.Element {
       dispatch(sendComment({ id: id, comment, rating }));
     }
   };
+
   const isAuthorization = useAppSelector((state) => state.authorizationStatus);
+
   if (isAuthorization === AuthorizationStatus.Auth) {
     return (
       <form
@@ -67,10 +70,10 @@ function Comment({ id }: CommentProps): JSX.Element {
     return (
       <div>
         <strong>
+          <p>There should be reviews form, but only for registered users.</p>
           <p>
-            There should be reviews form, but only for registered users.
+            Please register! You will be able to use form and leave your review.
           </p>
-          <p>Please register! You will be able to use form and leave your review.</p>
         </strong>
       </div>
     );
