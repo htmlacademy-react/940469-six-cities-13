@@ -97,3 +97,9 @@ export const CHECK_RATING = 0;
 export const MAX_COMMENT_LENGTH = 300;
 
 export const MIN_COMMENT_LENGTH = 50;
+
+export enum NameSpace {
+  GetData = 'GET_DATA',
+  UserAuthorization = 'USER_AUTHORIZATION',
+  PostData = 'POST_DATA',
+}

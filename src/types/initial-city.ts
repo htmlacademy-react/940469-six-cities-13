@@ -1,5 +1,4 @@
 import { ApartmentOffer } from './offer';
-import { AuthorizationStatus } from '../const';
 import { ApartmentReview } from './review';
 
 export type InitialCityType = {
@@ -7,7 +6,6 @@ export type InitialCityType = {
   offers: ApartmentOffer[];
   sorting: string;
   isOffersDataLoading: boolean;
-  authorizationStatus: AuthorizationStatus;
   user: string;
   oneOffer: null | ApartmentOffer;
   offerReviews: [] | ApartmentReview[];

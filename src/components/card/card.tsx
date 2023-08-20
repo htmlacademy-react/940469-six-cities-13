@@ -2,6 +2,7 @@ import { ApartmentOffer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { Authorization } from '../../const';
 import cn from 'classnames';
+import { memo } from 'react';
 
 type CardProps = {
   offer: ApartmentOffer;
@@ -81,4 +82,4 @@ function Card({ offer, handleOnMouseMove }: CardProps): JSX.Element {
   );
 }
 
-export default Card;
+export default memo(Card);
