@@ -1,6 +1,38 @@
 import { Helmet } from 'react-helmet-async';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import { FormEvent, useRef } from 'react';
+import {Authorization, AuthorizationStatus} from '../../const';
+import { useNavigate } from 'react-router-dom';
+import { loginAction } from '../../store/api-action';
+import { Link } from 'react-router-dom';
+import Main from '../main/main';
 
 function Login(): JSX.Element {
+  const password = useRef<HTMLInputElement | null>(null);
+  const email = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const isAuthorization = useAppSelector((state) => state.authorizationStatus);
+
+  const handleLoginSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (email.current !== null && password.current !== null) {
+      dispatch(
+        loginAction({
+          email: email.current.value,
+          password: password.current.value,
+        }),
+      );
+      navigate(Authorization.Main);
+    }
+  };
+
+  if (isAuthorization === AuthorizationStatus.Auth) {
+    return <Main/>;
+  }
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -10,7 +42,7 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -18,7 +50,7 @@ function Login(): JSX.Element {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -28,10 +60,16 @@ function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="src/components/login#"
+              method="post"
+              onSubmit={handleLoginSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  ref={email}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -42,6 +80,7 @@ function Login(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  ref={password}
                   className="login__input form__input"
                   type="password"
                   name="password"
@@ -59,7 +98,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <a className="locations__item-link" href="src/components/login#">
                 <span>Amsterdam</span>
               </a>
             </div>

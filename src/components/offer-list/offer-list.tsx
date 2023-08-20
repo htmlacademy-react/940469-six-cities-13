@@ -13,6 +13,7 @@ type OfferListProps = {
 
 function OfferList({ offers, handleOnMouseMove }: OfferListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState('');
+
   useEffect(() => {
     if (activeCard) {
       handleOnMouseMove(activeCard);

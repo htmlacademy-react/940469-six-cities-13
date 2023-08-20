@@ -4,50 +4,59 @@ import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import { Authorization } from '../../const';
-import { ApartmentReview } from '../../types/review';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
-
-type AppProps = {
-  reviews: ApartmentReview[];
-};
+import Spinner from '../spinner/spinner';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+import { store } from '../../store';
+import {
+  checkAuthorizationAction,
+  fetchOffersAction,
+} from '../../store/api-action';
 
 //TODO: Нужно не забыть реализовать Layout, NavLink, Link и Suspense.
 
-function App({ reviews }: AppProps): JSX.Element {
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthorizationAction());
 
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+function App(): JSX.Element {
+  const isOffersDataLoading = useAppSelector(
+    (state) => state.isOffersDataLoading,
+  );
 
-  if (isOffersDataLoading) {
-    return (
-      <LoadingScreen />
-    );
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+
+  if (isOffersDataLoading || isDataLoading) {
+    return <Spinner />;
   }
-
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={Authorization.Main}>
-            <Route index element={<Main/>} />
+            <Route index element={<Main />} />
             <Route path={Authorization.Login} element={<Login />}></Route>
             <Route
               path={Authorization.Favorites}
               element={
-                <PrivateRoute isAuth>
-                  <Favorites/>
+                <PrivateRoute>
+                  <Favorites />
                 </PrivateRoute>
               }
             />
-            <Route path={`${Authorization.Offer}/:id`} element={<Offer reviews={reviews}/>}></Route>
+            <Route
+              path={`${Authorization.Offer}/:id`}
+              element={<Offer />}
+            >
+            </Route>
             <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

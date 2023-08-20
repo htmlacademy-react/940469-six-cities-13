@@ -1,50 +1,83 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Rating from '../rating/rating';
-import {stars} from '../../const';
+import { AuthorizationStatus, stars } from '../../const';
+import { sendComment } from '../../store/api-action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
-type comment = {
-  comment: string;
+type CommentProps = {
+  id: string;
 };
 
-function Comment(): JSX.Element {
+function Comment({ id }: CommentProps): JSX.Element {
+  const initialState = { id: id, comment: '', rating: 0 };
 
-  const [, setComment] = useState<comment>();
+  const [commentData, setCommentData] = useState(initialState);
 
-  const handleInput = () => ({target}: ChangeEvent<HTMLTextAreaElement>) => {
+  const setRating = (value: number) => {
+    setCommentData((inputComment) => ({ ...inputComment, rating: value }));
+  };
+  const handleChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
     const comment = target.value;
-    setComment((inputComment) => ({...inputComment, comment}));
+    setCommentData((inputComment) => ({ ...inputComment, comment }));
   };
 
-  return (
-    <form className="reviews__form form" action="#" method="post">
-      <label className="reviews__label form__label" htmlFor="review">
-        Your review
-      </label>
-      <Rating stars={stars}/>
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onInput={handleInput}
+  const { comment, rating } = commentData;
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (id) {
+      dispatch(sendComment({ id: id, comment, rating }));
+    }
+  };
+
+  const isAuthorization = useAppSelector((state) => state.authorizationStatus);
+
+  if (isAuthorization === AuthorizationStatus.Auth) {
+    return (
+      <form
+        className="reviews__form form"
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
       >
-      </textarea>
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set{' '}
-          <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button
-          className="reviews__submit form__submit button"
-          type="submit"
-          disabled
+        <label className="reviews__label form__label" htmlFor="review">
+          Your review
+        </label>
+        <Rating stars={stars} setRating={setRating} />
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={handleChange}
         >
-          Submit
-        </button>
+        </textarea>
+        <div className="reviews__button-wrapper">
+          <p className="reviews__help">
+            To submit review please make sure to set{' '}
+            <span className="reviews__star">rating</span> and describe your stay
+            with at least <b className="reviews__text-amount">50 characters</b>.
+          </p>
+          <button className="reviews__submit form__submit button" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    );
+  } else {
+    return (
+      <div>
+        <strong>
+          <p>There should be reviews form, but only for registered users.</p>
+          <p>
+            Please register! You will be able to use form and leave your review.
+          </p>
+        </strong>
       </div>
-    </form>
-  );
+    );
+  }
 }
 
 export default Comment;

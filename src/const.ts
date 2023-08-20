@@ -39,8 +39,7 @@ export const stars: ReviewStar[] = [
   },
 ];
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
@@ -76,6 +75,19 @@ export const TIMEOUT = 5000;
 
 export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
+export const AUTH_EMAIL_KEY_NAME = 'six-cities-email';
+
 export enum APIRoute {
   Offers = '/offers',
+  AuthorizationData = '/login',
+  Logout = '/logout',
+  Favorites = 'favorites',
+  Root = '/',
+  Comments = '/comments',
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
 }

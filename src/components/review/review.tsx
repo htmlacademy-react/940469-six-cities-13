@@ -7,7 +7,7 @@ type ReviewProps = {
 //TODO: Написать функцию для преобразования даты в человекочитаемый формат.
 //TODO: Все вычисления будут собраны в функции и перенесены в компонент с функциями.
 
-export default function Review({ review }: ReviewProps):JSX.Element {
+export default function Review({ review }: ReviewProps): JSX.Element {
   const { id, user, rating, date, comment } = review;
 
   return (
@@ -27,7 +27,7 @@ export default function Review({ review }: ReviewProps):JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${(rating * 20).toString()}%` }}></span>
+            <span style={{ width: `${(Math.round(rating) * 20).toString()}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
