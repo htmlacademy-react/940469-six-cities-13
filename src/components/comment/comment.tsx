@@ -1,6 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import {ChangeEvent, FormEvent, useState} from 'react';
 import Rating from '../rating/rating';
-import { AuthorizationStatus, stars } from '../../const';
+import {AuthorizationStatus, CHECK_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, stars} from '../../const';
 import { sendComment } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -24,6 +24,10 @@ function Comment({ id }: CommentProps): JSX.Element {
   const { comment, rating } = commentData;
 
   const dispatch = useAppDispatch();
+
+  const isCheckComment = rating !== CHECK_RATING
+    && comment.length <= MAX_COMMENT_LENGTH
+    && comment.length >= MIN_COMMENT_LENGTH;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,7 +64,7 @@ function Comment({ id }: CommentProps): JSX.Element {
             <span className="reviews__star">rating</span> and describe your stay
             with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit">
+          <button disabled={!isCheckComment} className="reviews__submit form__submit button" type="submit">
             Submit
           </button>
         </div>
