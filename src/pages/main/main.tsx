@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
@@ -8,14 +8,17 @@ import Header from '../../components/header/header';
 
 function Main(): JSX.Element {
   const [offerListActiveCard, setOfferListActiveCard] = useState('');
-  const handleOnMouseMove = (activeCard: string) => {
-    setOfferListActiveCard(activeCard);
-  };
+  const handleOnMouseMove = useCallback(
+    (activeCard: string) => {
+      setOfferListActiveCard(activeCard);
+    },
+    [setOfferListActiveCard],
+  );
 
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((store) => store.offers);
   const filteredOffer = offers.filter(
-    (offer) => offer.city.name === activeCity
+    (offer) => offer.city.name === activeCity,
   );
 
   return (
@@ -36,7 +39,7 @@ function Main(): JSX.Element {
                   (offer) => offer.city.name === activeCity,
                 )}
                 selectedPoint={offerListActiveCard}
-                city = {filteredOffer[0].city}
+                city={filteredOffer[0].city}
                 classMap={'cities__map'}
               />
             </div>

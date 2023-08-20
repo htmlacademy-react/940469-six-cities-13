@@ -1,11 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types';
-import { APIRoute, AuthorizationStatus } from '../const';
+import { APIRoute } from '../const';
 import {
   getOffersList,
   setOffersDataLoadingStatus,
-  requireAuthorization,
   getUser,
   redirectToRoute,
   getOffer,
@@ -78,7 +77,6 @@ export const loginAction = createAsyncThunk<
   });
   saveToken(token);
   saveLogin(email);
-  dispatch(requireAuthorization(AuthorizationStatus.Auth));
   dispatch(getUser(email));
   dispatch(redirectToRoute(APIRoute.Root));
 });
@@ -95,7 +93,6 @@ export const logoutAction = createAsyncThunk<
   await api.delete(APIRoute.Logout);
   dropToken();
   dropLogin();
-  dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   dispatch(getUser(''));
 });
 
@@ -107,13 +104,8 @@ export const checkAuthorizationAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
-  try {
-    await api.get(APIRoute.AuthorizationData);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-  } catch {
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-  }
+>('user/checkAuth', async (_arg, {extra: api }) => {
+  await api.get(APIRoute.AuthorizationData);
 });
 
 export const sendComment = createAsyncThunk<

@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {ChangeEvent, FormEvent, useCallback, useState} from 'react';
 import Rating from '../rating/rating';
 import {AuthorizationStatus, CHECK_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, stars} from '../../const';
 import { sendComment } from '../../store/api-action';
@@ -13,15 +13,19 @@ function Comment({ id }: CommentProps): JSX.Element {
 
   const [commentData, setCommentData] = useState(initialState);
 
-  const setRating = (value: number) => {
-    setCommentData((inputComment) => ({ ...inputComment, rating: value }));
-  };
   const handleChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
     const comment = target.value;
     setCommentData((inputComment) => ({ ...inputComment, comment }));
   };
 
+
   const { comment, rating } = commentData;
+
+  const setRating = useCallback((value: number) => {
+    setCommentData((inputComment) => ({ ...inputComment, rating: value }));
+  },
+  [rating],
+  );
 
   const dispatch = useAppDispatch();
 
