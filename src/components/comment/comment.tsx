@@ -1,9 +1,8 @@
-import {ChangeEvent, FormEvent, FormHTMLAttributes, useState} from 'react';
+import {ChangeEvent, FormEvent, useState} from 'react';
 import Rating from '../rating/rating';
 import {AuthorizationStatus, CHECK_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, stars} from '../../const';
 import { sendComment } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import cn from 'classnames';
 
 type CommentProps = {
   id: string;
