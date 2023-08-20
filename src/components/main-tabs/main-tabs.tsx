@@ -3,12 +3,13 @@ import { cities } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { changeCity } from '../../store/action';
 import cn from 'classnames';
+import { memo } from 'react';
 
 type MainTabsProps = {
   activeCity: string;
 };
 
-export default function MainTabs({ activeCity }: MainTabsProps): JSX.Element {
+function MainTabs({ activeCity }: MainTabsProps): JSX.Element {
   const dispatch = useAppDispatch();
   return (
     <div className="tabs">
@@ -32,3 +33,5 @@ export default function MainTabs({ activeCity }: MainTabsProps): JSX.Element {
     </div>
   );
 }
+
+export default memo(MainTabs);

@@ -1,12 +1,13 @@
 import { ReviewStar } from '../../types/star';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
+
 
 type RatingProps = {
   stars: ReviewStar[];
   setRating: (rating: number) => void;
 };
 
-export default function Rating({ stars, setRating }: RatingProps): JSX.Element {
+function Rating({ stars, setRating }: RatingProps): JSX.Element {
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const rating = Number(target.value);
     setRating(+rating);
@@ -38,3 +39,6 @@ export default function Rating({ stars, setRating }: RatingProps): JSX.Element {
     </div>
   );
 }
+
+export default memo(Rating);
+
